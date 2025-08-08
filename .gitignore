@@ -1,0 +1,46 @@
+# Ignorar carpetas target en todos los microservicios
+**/target/
+
+# Ignorar archivos de configuración locales
+*.iml
+*.log
+*.class
+*.jar
+*.war
+*.ear
+*.db
+*.sqlite
+
+# Ignorar configuraciones de IDEs
+# IntelliJ
+.idea/
+*.iws
+*.ipr
+
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar variables de entorno personalizadas
+.env
+*.env
+
+# Ignorar archivos temporales de OS
+*.swp
+*.swo
+*~
+
+# Archivos de build generados (por seguridad)
+build/
+out/
+
+# Para evitar subir dependencias locales (por si acaso)
+**/node_modules/

@@ -1,0 +1,37 @@
+server:
+  port: 9292
+
+
+spring:
+  application:
+    name: notification-service
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    virtual-host: ${RABBITMQ_VIRTUAL_HOST}
+    port: ${RABBITMQ_PORT}
+    ssl:
+      enabled: true
+
+
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+frontend:
+  base-url: ${FRONTEND_BASE_URL}
+  urls:
+    activate-account: ${FRONTEND_URLS_ACTIVATE_ACCOUNT}
+    report-account: ${FRONTEND_URLS_REPORT_ACCOUNT}
+app:
+  logo-url: ${APP.LOGO_URL}
+

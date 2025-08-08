@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+cors:
+  allowed-origin: ${CORS_ALLOWED_ORIGIN}
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: ${USER_SERVICE_URI}
+              predicates:
+                - Path=/api/users/**
+            - id: auth-service
+              uri: ${AUTH_SERVICE_URI}
+              predicates:
+                - Path=/api/auth/**, /api/verification-tokens/**
+            - id: product-service
+              uri: ${PRODUCT_SERVICE_URI}
+              predicates:
+                - Path=/api/products/**, /api/categories/**, /api/visual-variants/**, /api/cover-images/**
+            - id: cart-service
+              uri: ${CART_SERVICE_URI}
+              predicates:
+                - Path=/api/carts/**
+            - id: order-service
+              uri: ${ORDER_SERVICE_URI}
+              predicates:
+                - Path=/api/orders/**, /api/shipments/**
+            - id: inventory-service
+              uri: ${INVENTORY_SERVICE_URI}
+              predicates:
+                - Path=/api/inventories/**
+
+
