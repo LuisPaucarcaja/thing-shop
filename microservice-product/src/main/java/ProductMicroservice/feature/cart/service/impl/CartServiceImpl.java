@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import static ProductMicroservice.common.constants.CacheConstants.GET_CART_BY_USER;
 
@@ -21,17 +20,16 @@ public class CartServiceImpl implements ICartService {
     private final CartRepository cartRepository;
     private final CartMapper cartMapper;
 
-
-    @Transactional(readOnly = true)
     @Override
     @Cacheable(value = GET_CART_BY_USER, key = "#userId", unless = "#result == null")
     public CartDetail getCartForUser(Long userId) {
-        return cartMapper.toDTOUser(cartRepository.findByUserId(userId));
+        Cart cart = cartRepository.findByUserId(userId);
+        return cartMapper.toDetailDto(cart);
     }
 
     @Override
     public CartSummary getCartToCreateOrder(Long userId) {
-        return cartMapper.toDto(cartRepository.findByUserId(userId));
+        return cartMapper.toSummaryDto(cartRepository.findByUserId(userId));
     }
 
 
@@ -44,8 +42,8 @@ public class CartServiceImpl implements ICartService {
         return cart;
     }
 
-    @CacheEvict(value = GET_CART_BY_USER, key = "#userId")
     @Override
+    @CacheEvict(value = GET_CART_BY_USER, key = "#userId")
     public void invalidateCartCache(Long userId) {
     }
 }

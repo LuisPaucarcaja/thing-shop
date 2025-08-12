@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface InventoryService {
 
-    List<StockLevel> getReducedInventories(List<Long> ids);
+    List<StockLevel> getAvailableStockLevelsByVariantIds(List<Long> ids);
 
 }

@@ -25,7 +25,7 @@ public class InventoryServiceImpl implements InventoryService {
     private final ReservationService reservationService;
 
     @Override
-    public List<StockLevel> getReducedInventories(List<Long> variantIds) {
+    public List<StockLevel> getAvailableStockLevelsByVariantIds(List<Long> variantIds) {
 
         Map<Long, Integer> reservations = castReservationsToMap(
                 reservationService.findReservationsActiveByVariants(variantIds));
@@ -52,7 +52,7 @@ public class InventoryServiceImpl implements InventoryService {
             }
         }
 
-        return inventories;
+        return inventoryMap.values().stream().toList();
     }
 
     private List<StockLevel> getInventoriesByVariantIds(List<Long> variantIds) {

@@ -22,10 +22,9 @@ spring:
     port: ${RABBITMQ_PORT}
     ssl:
       enabled: true
+
 gateway:
   url: ${GATEWAY_URL}
 
 m2m:
   apikey: ${M2M_APIKEY}
-
-

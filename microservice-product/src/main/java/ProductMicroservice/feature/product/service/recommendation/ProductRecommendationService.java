@@ -36,7 +36,6 @@ public class ProductRecommendationService {
         if (missing > 0 && !orderedProducts.isEmpty()) {
             Long categoryId = getMostSpecificCategoryId(orderedProducts.get(0));
 
-            // 1. Obtener página sin fetch para que sea eficiente
             Page<Product> similarProductsPage = productRepository.findByCategory(
                     categoryId,
                     PageRequest.of(0, missing)

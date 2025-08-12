@@ -10,6 +10,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -46,7 +47,7 @@ public class ProductVariant extends Auditable implements Serializable {
 
 
     @OneToMany(mappedBy = "productVariant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ProductVariantAttribute> variantAttributes;
+    private Set<ProductVariantAttribute> variantAttributes = new HashSet<>();
 
 
 }

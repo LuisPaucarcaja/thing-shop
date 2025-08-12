@@ -10,10 +10,10 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring" , uses = CartItemMapper.class)
 public interface CartMapper {
 
-
-    CartDetail toDTOUser(Cart cart);
+    @Mapping(source = "cartItems", target = "cartItems")
+    CartDetail toDetailDto(Cart cart);
 
 
     @Mapping(source = "cartItems", target = "cartItems")
-    CartSummary toDto(Cart cart);
+    CartSummary toSummaryDto(Cart cart);
 }

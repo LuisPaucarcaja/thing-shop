@@ -19,21 +19,21 @@ public interface VariantMapper {
 
 
     default String getPrimaryImageUrl(ProductVariant productVariant) {
-        if (productVariant.getVisualVariant() != null &&
-                productVariant.getVisualVariant().getMediaList() != null &&
-                !productVariant.getVisualVariant().getMediaList().isEmpty()) {
 
-            return productVariant.getVisualVariant().getMediaList()
+        if (productVariant.getVisualVariant() != null) {
+
+            return  productVariant.getVisualVariant().getMediaList()
                     .stream()
-                    .filter(ProductMedia::getIsPrimary)
+                    .filter(m -> Boolean.TRUE.equals(m.getIsPrimary()))
                     .map(ProductMedia::getUrl)
                     .findFirst()
                     .orElse(null);
-        }
 
-        // Ya no se devuelve imagen de product, simplemente null
+        }
         return null;
+
     }
+
 
 
     @Mapping(target = "visualVariantId", source = "visualVariant.id")

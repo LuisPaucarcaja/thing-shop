@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
     @EntityGraph(attributePaths = {
+            "cartItems.productVariant.product",
+            "cartItems.productVariant.variantAttributes.attributeValue.attribute",
             "cartItems.productVariant.visualVariant.mediaList"
     })
     Cart findByUserId(Long userId);

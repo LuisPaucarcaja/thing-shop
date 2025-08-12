@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for inventory-service-ts on 2025-08-04T00:32:28-05:00
+# fly.toml app configuration file generated for inventory-service-ts on 2025-08-11T20:01:08-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -17,4 +17,4 @@ primary_region = 'bog'
   processes = ['app']
 
 [[vm]]
-  size = 'performance-16x'
+  size = 'performance-8x'

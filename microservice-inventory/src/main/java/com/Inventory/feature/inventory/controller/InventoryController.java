@@ -18,7 +18,7 @@ public class InventoryController {
 
     @GetMapping
     public List<StockLevel> getInventoriesByVariants( @RequestParam @Size(max = 50) List<@Positive Long> variantIds ){
-        return inventoryService.getReducedInventories(variantIds);
+        return inventoryService.getAvailableStockLevelsByVariantIds(variantIds);
     }
 
 
