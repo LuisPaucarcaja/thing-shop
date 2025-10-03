@@ -1,0 +1,52 @@
+server:
+  port: 9090
+
+spring:
+  cache:
+    type: redis
+  application:
+    name: order-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/todosobrecompras
+    username: postgres
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    user:
+      name: disabled
+      password: disabled
+  rabbitmq:
+    host: localhost
+    username: user
+    password: password
+    port: 5672
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      username: default
+      password:
+gateway:
+  url: localhost:8080
+
+
+mercado_pago:
+  access_token: APP_USR-4093680170302430-051723-2da373809b407b58af991f9eef59381c-1816708651
+
+
+jwt:
+  secret-key: xF9pQHR91wxcQi8jAKIA4ZPZasdasdpymasdasda2222asd
+
+redis:
+  host: localhost
+  port: 6379
+
+m2m:
+  apikey: Que-chucha-fue-@123456789
+
+
