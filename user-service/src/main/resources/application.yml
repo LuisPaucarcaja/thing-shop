@@ -26,6 +26,12 @@ spring:
     port: ${RABBITMQ_PORT}
     ssl:
       enabled: true
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      username: ${REDIS_USERNAME}
+      password: ${REDIS_PASSWORD}
   security:
     oauth2:
       client:
@@ -48,9 +54,3 @@ cloud:
 
 jwt:
   secret-key: ${JWT_SECRET_KEY}
-
-redis:
-  host: ${REDIS_HOST}
-  port: ${REDIS_PORT}
-  username: ${REDIS_USERNAME}
-  password: ${REDIS_PASSWORD}

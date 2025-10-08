@@ -42,7 +42,6 @@ public class UserServiceImpl implements IUserService {
 
     private final IRoleRepository roleRepository;
 
-
     private final EmailVerificationProducer emailVerificationProducer;
     private final UserAvatarService userAvatarService;
     private final IVerificationTokenService verificationTokenService;

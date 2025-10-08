@@ -20,14 +20,15 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      username: ${REDIS_USERNAME}
+      password: ${REDIS_PASSWORD}
 
 jwt:
   secret-key: ${JWT_SECRET_KEY}
 
-redis:
-  host: ${REDIS_HOST}
-  port: ${REDIS_PORT}
-  username: ${REDIS_USERNAME}
-  password: ${REDIS_PASSWORD}
 
 

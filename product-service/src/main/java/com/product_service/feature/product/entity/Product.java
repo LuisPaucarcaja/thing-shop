@@ -46,9 +46,4 @@ public class Product extends Auditable {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ProductMedia> genericMediaList = new HashSet<>();
 
-    public void addCategory(Category category) {
-        this.categories.add(category);
-    }
-
-
 }

@@ -59,7 +59,7 @@ class ProductRepositoryIT {
     @Test
     @Sql("/datasets/products_with_categories.sql")
     void findByIdWithMediaAndBrand_whenProductExists_returnsProductWithBrandAndMedia() {
-        Optional<Product> found = productRepository.findById(1L);
+        Optional<Product> found = productRepository.findByProductId(1L);
 
         assertThat(found).isPresent();
         assertThat(found.get().getName()).isEqualTo("UltraBoost");
@@ -73,16 +73,13 @@ class ProductRepositoryIT {
     }
 
     @Test
-    void findByIdsWithCategoriesTest() {
+    void findByIdsWithMediaTest() {
 
-        Category category = new Category(null, "Shoes", null);
-        entityManager.persist(category);
 
         Brand brand = new Brand(null, "Adidas");
         entityManager.persist(brand);
 
         Product product = ProductTestBuilder.aProduct()
-                .withCategory(category)
                 .build();
 
         ProductMedia media = ProductMedia.builder()
@@ -91,41 +88,23 @@ class ProductRepositoryIT {
                 .isPrimary(true)
                 .product(product)
                 .build();
+
         product.setGenericMediaList(Set.of(media));
+        product.setBrand(brand);
+        product.setName("Test");
 
         entityManager.persist(product);
         entityManager.flush();
 
-        List<Product> productList = productRepository.findByIdsWithCategories(List.of(1L));
+        List<Product> productList = productRepository.findByIdsWithPrimaryMedia(List.of(1L));
 
         assertEquals(1, productList.size());
         Product result = productList.get(0);
 
-        assertThat(result.getCategories()).extracting("name").contains("Shoes");
         assertThat(result.getGenericMediaList()).extracting("url").contains("http://example.com/ultraboost.jpg");
     }
 
-    @Test
-    @Sql("/datasets/products_with_categories.sql")
-    void findByCategory_whenProductsExist_shouldReturnPagedProducts(){
-        Pageable pageable = PageRequest.of(0, 10);
-        Page<Product> result = productRepository.findByCategory(1L, pageable);
-        assertThat(result.getTotalElements()).isEqualTo(1);
 
-    }
-
-    @Test
-    @Sql("/datasets/products_with_categories.sql")
-    void findByCategory_WhenCategoryHasNoProducts_ShouldReturnEmptyPage(){
-        // given
-        Pageable pageable = PageRequest.of(0, 10);
-
-        // when
-        Page<Product> result = productRepository.findByCategory(999L, pageable);
-        // then
-        assertThat(result).isEmpty();
-
-    }
 
 
 

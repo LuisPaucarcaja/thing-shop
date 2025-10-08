@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for product-service-ts on 2025-08-11T19:30:53-05:00
+# fly.toml app configuration file generated for product-service-ts on 2025-10-08T13:52:14-05:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'product-service-ts'
-primary_region = 'bog'
+primary_region = 'gru'
 
 [build]
 
@@ -17,4 +17,4 @@ primary_region = 'bog'
   processes = ['app']
 
 [[vm]]
-  size = 'performance-16x'
+  size = 'performance-8x'

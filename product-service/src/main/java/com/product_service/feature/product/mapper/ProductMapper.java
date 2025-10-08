@@ -23,6 +23,10 @@ public interface ProductMapper {
     ProductSummary toSummaryDto(Product product);
 
     default String getPrimaryImageUrl(Product product) {
+        if (product == null || product.getGenericMediaList() == null) {
+            return null;
+        }
+
         return product.getGenericMediaList()
                 .stream()
                 .filter(ProductMedia::getIsPrimary)
@@ -30,6 +34,7 @@ public interface ProductMapper {
                 .findFirst()
                 .orElse(null);
     }
+
 
 
 }

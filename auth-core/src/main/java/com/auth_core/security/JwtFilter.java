@@ -67,6 +67,7 @@ public class JwtFilter extends OncePerRequestFilter {
         } catch (JwtException | UnauthorizedException ex) {
             writeErrorResponse(response, ex.getMessage(), HttpStatus.UNAUTHORIZED);
         } catch (Exception ex) {
+            ex.printStackTrace();
             writeErrorResponse(response, ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

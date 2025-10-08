@@ -24,19 +24,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // ========== ENTITY ==========
     // ============================
 
-    @EntityGraph(attributePaths = {"genericMediaList", "brand"})
-    Optional<Product> findById(@Param("id") Long id);
+    @Query("SELECT p FROM Product p LEFT JOIN FETCH p.genericMediaList gm " +
+            "JOIN FETCH p.categories WHERE p.id =:id AND gm.isPrimary = true")
+    Optional<Product> findByProductId(@Param("id") Long id);
 
-    @Query("SELECT p FROM Product p JOIN FETCH p.categories JOIN FETCH p.genericMediaList WHERE p.id IN :ids")
-    List<Product> findByIdsWithCategories(@Param("ids") List<Long> ids);
+    @Query("SELECT p.id FROM Product p JOIN p.categories c WHERE c.id = :categoryId")
+    Page<Long> findIdsByCategory(@Param("categoryId") Long categoryId, Pageable pageable);
 
-    @Query("SELECT DISTINCT p FROM Product p JOIN p.genericMediaList gm " +
-            "JOIN p.categories c WHERE c.id = :categoryId")
-    Page<Product> findByCategory(@Param("categoryId") Long categoryId, Pageable pageable);
+    @Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.genericMediaList gm WHERE p.id IN :ids AND gm.isPrimary = true")
+    List<Product> findByIdsWithPrimaryMedia(@Param("ids") List<Long> ids);
 
-    @Query("SELECT DISTINCT p FROM Product p LEFT JOIN FETCH p.genericMediaList " +
-            "LEFT JOIN FETCH p.categories WHERE p IN :products")
-    List<Product> fetchCollectionsForProducts(@Param("products") List<Product> products);
 
     @Query("SELECT DISTINCT p.brand FROM Product p JOIN p.categories c WHERE c.id = :categoryId")
     List<Brand> findBrandsByCategoryId(@Param("categoryId") Long categoryId);
