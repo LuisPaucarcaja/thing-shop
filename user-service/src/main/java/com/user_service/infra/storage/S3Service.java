@@ -65,7 +65,10 @@ public class S3Service {
 
     public String uploadImageFromUrl(String imageUrl, String destinationPath) {
         try (InputStream inputStream = new URL(imageUrl).openStream()) {
-            String contentType = new Tika().detect(inputStream);
+
+            byte[] imageBytes = inputStream.readAllBytes();
+
+            String contentType = new Tika().detect(imageBytes);
 
             String fileName = destinationPath + "/" + UUID.randomUUID() + ".jpg";
 
@@ -75,7 +78,7 @@ public class S3Service {
                             .key(fileName)
                             .contentType(contentType)
                             .build(),
-                    RequestBody.fromInputStream(inputStream, inputStream.available())
+                    RequestBody.fromBytes(imageBytes)
             );
 
             return String.format("https://%s.s3.amazonaws.com/%s", bucketName, fileName);
@@ -84,6 +87,7 @@ public class S3Service {
             throw new FileUploadException("Error uploading image from URL: " + e.getMessage());
         }
     }
+
 
 
     public void deletePreviousImageFromS3(String imageUrl) {

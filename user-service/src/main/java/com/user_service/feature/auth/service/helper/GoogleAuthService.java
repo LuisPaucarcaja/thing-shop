@@ -96,7 +96,6 @@ public class GoogleAuthService {
         User savedUser = userRepository.save(newUser);
 
         String googleAvatarUrl = (String) payload.get("picture");
-
         String uploadedAvatarUrl = userAvatarService.uploadAvatarFromUrl(googleAvatarUrl, savedUser.getId());
 
 
